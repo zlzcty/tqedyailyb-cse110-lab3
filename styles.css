@@ -1,0 +1,11 @@
+input, select {
+    width: 100%;
+}
+
+input{
+    box-sizing:border-box;
+} 
+
+#userForm {
+    max-width: 170px;
+}
