@@ -1,3 +1,7 @@
+.note-item {
+    color: black;
+}
+
 .note-individual {
     border: 1px solid black;
     display: 'flex';
