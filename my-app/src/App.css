@@ -2,6 +2,13 @@
     color: black;
 }
 
+input {
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
 .note-individual {
     border: 1px solid black;
     display: 'flex';
