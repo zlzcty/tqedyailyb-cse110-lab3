@@ -6,6 +6,7 @@ import FavoriteButton from './FavoriteButton';
 // import { FavoritesProvider } from "./FavoritesContext"
 import { ClickCounter } from './hooksExercise';
 import React, { useState } from 'react';
+import { ToggleThemeButton, ThemeProvider } from './ThemeContext';
 
 function App() {
     const [favorites, setFavorites] = useState<Note[]>([]);
@@ -21,46 +22,52 @@ function App() {
     };
 
     return (
-        <div className="app-container">
-            <form className="note-form">
+        <ThemeProvider>
+            <div className="app-container">
                 <div>
-                    <input placeholder="Note Title"></input>
-                </div>
-
-                <div>
-                    <textarea></textarea>
-                </div>
-
-                <div>
-                    <button type="submit">Create Note</button>
-                </div>
-
-                {/* <FavoriteList /> */}
-                <h2>List of Favorites</h2>
-                <ul>
-                    {favorites.map((favorite, index) => (
-                        <li key={index}>{favorite.title}</li>
-                    ))}
-                </ul>
-            </form>
-            <div className="notes-grid">
-                {dummyNotesList.map((note) => (
-                    <div key={note.id} className="note-item">
-                        <div className="notes-header">
-                            <FavoriteButton
-                                toggleFavorite={toggleFavorite}
-                                note={note}
-                            />
-                            <button>x</button>
+                    <form className="note-form">
+                        <div>
+                            <input placeholder="Note Title"></input>
                         </div>
-                        <h2> {note.title} </h2>
-                        <p> {note.content} </p>
-                        <p> {note.label} </p>
-                    </div>
-                ))}
+
+                        <div>
+                            <textarea></textarea>
+                        </div>
+
+                        <div>
+                            <button type="submit">Create Note</button>
+                        </div>
+                    </form>
+                    <ToggleThemeButton />
+
+                    {/* <FavoriteList /> */}
+                    <h2>List of Favorites</h2>
+                    <ul>
+                        {favorites.map((favorite, index) => (
+                            <li key={index}>{favorite.title}</li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div className="notes-grid">
+                    {dummyNotesList.map((note) => (
+                        <div key={note.id} className="note-item">
+                            <div className="notes-header">
+                                <FavoriteButton
+                                    toggleFavorite={toggleFavorite}
+                                    note={note}
+                                />
+                                <button>x</button>
+                            </div>
+                            <h2> {note.title} </h2>
+                            <p> {note.content} </p>
+                            <p> {note.label} </p>
+                        </div>
+                    ))}
+                </div>
+                {/* <ClickCounter /> */}
             </div>
-            {/* <ClickCounter /> */}
-        </div>
+        </ThemeProvider>
     );
 }
 
