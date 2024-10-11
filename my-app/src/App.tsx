@@ -130,9 +130,9 @@ function App() {
                                 />
                                 <button>x</button>
                             </div>
-                            <h2> {note.title} </h2>
-                            <p> {note.content} </p>
-                            <p> {note.label} </p>
+                            <h2 contentEditable="true"> {note.title} </h2>
+                            <p contentEditable="true"> {note.content} </p>
+                            <p contentEditable="true"> {note.label} </p>
                         </div>
                     ))}
                 </div>
