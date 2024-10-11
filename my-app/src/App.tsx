@@ -41,6 +41,12 @@ function App() {
         setCreateNote(initialNote);
     };
 
+    const removeNote = (noteID: number) => {
+        // We can just use the setNotes function! It should always be used
+        // when updating I think
+        setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteID));
+    };
+
     return (
         <ThemeProvider>
             <div className="app-container">
@@ -128,7 +134,9 @@ function App() {
                                     toggleFavorite={toggleFavorite}
                                     note={note}
                                 />
-                                <button>x</button>
+                                <button onClick={() => removeNote(note.id)}>
+                                    x
+                                </button>
                             </div>
                             <h2 contentEditable="true"> {note.title} </h2>
                             <p contentEditable="true"> {note.content} </p>
