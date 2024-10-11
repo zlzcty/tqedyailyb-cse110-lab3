@@ -11,12 +11,17 @@ import { ToggleThemeButton, ThemeProvider } from './ThemeContext';
 function App() {
     const [favorites, setFavorites] = useState<Note[]>([]);
 
-    const toggleFavorite = (item: Note) => {
+    const toggleFavorite = (item: Note, remove: boolean) => {
         setFavorites((prevFavorites) => {
             if (prevFavorites.includes(item)) {
                 return prevFavorites.filter((favorite) => favorite !== item);
             } else {
-                return [...prevFavorites, item];
+                // 'remove'=True will only remove the note if it exists in favorites
+                if (!remove) {
+                    return [...prevFavorites, item];
+                } else {
+                    return [...prevFavorites];
+                }
             }
         });
     };
@@ -41,10 +46,13 @@ function App() {
         setCreateNote(initialNote);
     };
 
-    const removeNote = (noteID: number) => {
+    const removeNote = (removedNote: Note) => {
         // We can just use the setNotes function! It should always be used
         // when updating I think
-        setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteID));
+        setNotes((prevNotes) =>
+            prevNotes.filter((note) => note.id !== removedNote.id)
+        );
+        toggleFavorite(removedNote, true);
     };
 
     return (
@@ -134,7 +142,7 @@ function App() {
                                     toggleFavorite={toggleFavorite}
                                     note={note}
                                 />
-                                <button onClick={() => removeNote(note.id)}>
+                                <button onClick={() => removeNote(note)}>
                                     x
                                 </button>
                             </div>

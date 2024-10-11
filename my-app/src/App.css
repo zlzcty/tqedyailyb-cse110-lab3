@@ -1,5 +1,6 @@
-.note-item {
-    color: black;
+/* make app container extend to full height */
+.app-container {
+    height: 100vh;
 }
 
 input {
@@ -48,13 +49,17 @@ body {
 .notes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-auto-rows: minmax(250px, auto);
+    /* grid-auto-rows: minmax(250px, auto); */
+    grid-auto-rows: 275px; /* Fixed height for rows */
     gap: 20px;
 }
 
 .note-item {
+    color: black;
+    max-height: 250px;
     display: flex;
     flex-direction: column;
+    overflow: scroll;
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;

@@ -3,7 +3,7 @@ import { Note } from './types';
 
 type FavoriteButtonProps = {
     note: Note; // the note object the FavoriteButton is a part of
-    toggleFavorite: (item: Note) => void;
+    toggleFavorite: (item: Note, remove: boolean) => void;
 };
 
 let instanceCounter = 0;
@@ -24,7 +24,7 @@ export default function FavoriteButton({
     // we specified for this to activate whenever it is changed
     const toggleClick = () => {
         setToggled((prevState) => !prevState);
-        toggleFavorite(note);
+        toggleFavorite(note, false);
     };
 
     return (
