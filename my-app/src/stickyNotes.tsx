@@ -33,6 +33,9 @@ export const StickyNotes = () => {
         label: Label.other,
     };
     const [createNote, setCreateNote] = useState(initialNote);
+    const [inputTitle, setInputTitle] = useState(initialNote.title);
+    const [inputContent, setInputContent] = useState(initialNote.content);
+    const [inputLabel, setInputLabel] = useState("other");
 
     const createNoteHandler = (event: React.FormEvent) => {
         event.preventDefault();
@@ -41,6 +44,9 @@ export const StickyNotes = () => {
         createNote.id = notes.length + 1;
         setNotes([createNote, ...notes]);
         setCreateNote(initialNote);
+        setInputTitle(initialNote.title);
+        setInputContent(initialNote.content);
+        setInputLabel("other");
     };
 
     const removeNote = (removedNote: Note) => {
@@ -60,11 +66,13 @@ export const StickyNotes = () => {
                         <div>
                             <input
                                 placeholder="Note Title"
-                                onChange={(event) =>
+                                value={inputTitle}
+                                onChange={(event) => {
                                     setCreateNote({
                                         ...createNote,
-                                        title: event.target.value,
-                                    })
+                                        title: event.target.value });
+                                        setInputTitle(event.target.value);
+                                    }
                                 }
                                 required
                             ></input>
@@ -73,11 +81,13 @@ export const StickyNotes = () => {
                         <div>
                             <textarea
                                 placeholder="Note Content"
-                                onChange={(event) =>
+                                value={inputContent}
+                                onChange={(event) => {
                                     setCreateNote({
                                         ...createNote,
-                                        content: event.target.value,
-                                    })
+                                        content: event.target.value });
+                                        setInputContent(event.target.value);
+                                    }
                                 }
                                 required
                             ></textarea>
@@ -85,11 +95,13 @@ export const StickyNotes = () => {
 
                         <div>
                             <select
-                                onChange={(event) =>
+                                value={inputLabel}
+                                onChange={(event) => {
                                     setCreateNote({
                                         ...createNote,
-                                        label: event.target.value as Label,
-                                    })
+                                        label: event.target.value as Label });
+                                        setInputLabel(event.target.value);
+                                    }
                                 }
                                 required
                             >
@@ -134,13 +146,13 @@ export const StickyNotes = () => {
 
                 <div className="notes-grid">
                     {notes.map((note) => (
-                        <div key={note.id} className="note-item">
+                        <div key={note.id} data-testid={'note' + note.id} className="note-item">
                             <div className="notes-header">
                                 <FavoriteButton
                                     toggleFavorite={toggleFavorite}
                                     note={note}
                                 />
-                                <button onClick={() => removeNote(note)}>
+                                <button data-testid={'note' + note.id + 'x'} onClick={() => removeNote(note)}>
                                     x
                                 </button>
                             </div>
