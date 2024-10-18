@@ -7,7 +7,7 @@ describe('Read ToDoList', () => {
     test('dummy items are visible', () => {
         render(<ToDoList />);
 
-        dummyGroceryList.forEach( (item) => {
+        dummyGroceryList.forEach((item) => {
             expect(screen.getByText(item.name)).toBeInTheDocument();
         });
     });
