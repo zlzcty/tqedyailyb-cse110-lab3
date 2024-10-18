@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { GroceryItem } from './types';
 import { dummyGroceryList } from './constant';
 import { useParams } from 'react-router-dom';
+import './toDoList.css';
 
 export function ToDoList() {
     const [numRemainingItems, setNumRemainingItems] = useState(0);
@@ -47,7 +48,7 @@ export function ToDoList() {
 
 function ListItem(item: GroceryItem, changeHandler: ChangeEventHandler) {
     return (
-        <div>
+        <div className="list-item">
             <input
                 type="checkbox"
                 data-testid={item.name + 'Box'}
